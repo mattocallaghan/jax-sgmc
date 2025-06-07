@@ -38,7 +38,7 @@ import numpy as onp
 
 import jax.numpy as jnp
 from jax import tree_util, lax
-from jax.experimental import host_callback
+from jax.experimental.io_callback import io_callback
 
 try:
   import ujson
@@ -700,7 +700,7 @@ def save(data_collector: DataCollector = None,
     # flattening on the host.
     chain_id, data = args
     flat_args = (chain_id, tree_util.tree_leaves(data))
-    counter = host_callback.id_tap(_save, flat_args, result=1)
+    counter = counter = io_callback(_save, arg=arg, result=1)
     return counter
 
   def init(init_sample, init_checkpoint, static_information) -> saving_state:
