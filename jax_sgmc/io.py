@@ -38,7 +38,7 @@ import numpy as onp
 
 import jax.numpy as jnp
 from jax import tree_util, lax
-from jax.experimental.io_callback import io_callback
+from jax.experimental import io_callback
 
 try:
   import ujson
