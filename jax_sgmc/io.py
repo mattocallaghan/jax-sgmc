@@ -700,7 +700,7 @@ def save(data_collector: DataCollector = None,
     # flattening on the host.
     chain_id, data = args
     flat_args = (chain_id, tree_util.tree_leaves(data))
-    counter = counter = io_callback(_save, arg=arg, result=1)
+    counter = counter = io_callback(_save,(), arg)
     return counter
 
   def init(init_sample, init_checkpoint, static_information) -> saving_state:
