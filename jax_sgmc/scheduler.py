@@ -311,10 +311,10 @@ def _progress_bar(burn_in: specific_scheduler,
   def _print_fn(info, _):
     percentage = round(
       int(info['current_iteration'].item()) / int(info['total_iterations'].item()) * 100)
-    total_samples = int(info["total_samples"])
-    collected_samples = int(info["collected_samples"])
-    current_iteration = int(info["current_iteration"])
-    total_iterations = int(info["total_iterations"])
+    total_samples = int(info["total_samples"].item())
+    collected_samples = int(info["collected_samples"].item())
+    current_iteration = int(info["current_iteration"].item())
+    total_iterations = int(info["total_iterations"].item())
 
     print(f"[Step {current_iteration}/{total_iterations}]"
           f"({percentage}%) Collected {collected_samples} of "
