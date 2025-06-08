@@ -358,8 +358,8 @@ def _progress_bar(burn_in: specific_scheduler,
     collected_samples = lax.cond(
       jnp.logical_and(jnp.mod(iteration, num_its) == 0, enabled),
       lambda arg:io_callback(_print_fn,None, arg),
-      lambda arg: info["collected_samples"],
-      info
+      lambda arg: arg["collected_samples"],
+      operand=info
     )
 
     new_state = iterations, tot_samples, collected_samples, steps, enabled
