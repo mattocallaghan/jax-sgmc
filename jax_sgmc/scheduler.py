@@ -309,9 +309,8 @@ def _progress_bar(burn_in: specific_scheduler,
   """
 
   def _print_fn(info, _):
-    print(info)
     percentage = round(
-      int(info['current_iteration']) / int(info['total_iterations']) * 100)
+      int(info['current_iteration'].item()) / int(info['total_iterations'].item()) * 100)
     total_samples = int(info["total_samples"])
     collected_samples = int(info["collected_samples"])
     current_iteration = int(info["current_iteration"])
