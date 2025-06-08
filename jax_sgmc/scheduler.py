@@ -28,7 +28,7 @@ from typing import Callable, Tuple
 import jax.numpy as jnp
 from jax import lax
 from jax import random
-from jax.experimental import host_callback as hcb
+from jax.experimental import io_callback
 
 from jax_sgmc.util import Array
 
@@ -357,7 +357,7 @@ def _progress_bar(burn_in: specific_scheduler,
     # Return the number of collected samples as result of id_tap
     collected_samples = lax.cond(
       jnp.logical_and(jnp.mod(iteration, num_its) == 0, enabled),
-      lambda arg: hcb.id_tap(_print_fn, arg, result=collected_samples),
+      lambda arg:io_callback(_print_fn,None, arg),
       lambda arg: info["collected_samples"],
       info
     )
