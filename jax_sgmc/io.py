@@ -761,7 +761,7 @@ def save(data_collector: DataCollector = None,
   def postprocess(state: saving_state, unused_saved):
     # Call with host callback to ensure that finalized is called after all other
     # id_tap processes were finished.
-   io_callback(lambda id, *unused: data_collector.finalize(id),None,
+    io_callback(lambda id, *unused: data_collector.finalize(id),None,
       state.chain_id)
     collected_samples = data_collector.finished(state.chain_id)
     return {"sample_count": state.saved_samples,
