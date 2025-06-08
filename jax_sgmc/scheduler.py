@@ -353,13 +353,16 @@ def _progress_bar(burn_in: specific_scheduler,
 
     # Calculate number of steps until the progress should be printed out
     num_its = jnp.int_(jnp.floor(iterations / steps))
-
+    def __step(arg):
+      io_callback(_print_fn,None, arg)
+      return arg["collected_samples"]
+      
     # Return the number of collected samples as result of id_tap
     collected_samples = lax.cond(
       jnp.logical_and(jnp.mod(iteration, num_its) == 0, enabled),
-      lambda arg:io_callback(_print_fn,None, arg),
-      lambda arg: arg["collected_samples"],
-      operand=info
+      __step,
+      lambda arg: info["collected_samples"],
+      info
     )
 
     new_state = iterations, tot_samples, collected_samples, steps, enabled
