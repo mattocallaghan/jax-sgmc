@@ -354,7 +354,8 @@ def _progress_bar(burn_in: specific_scheduler,
     # Calculate number of steps until the progress should be printed out
     num_its = jnp.int_(jnp.floor(iterations / steps))
     def __step(arg):
-      io_callback(_print_fn,None, (arg,None))
+      _pf=lambda arg: _print_fn(arg,None)
+      io_callback(_pf,None, arg)
       return arg["collected_samples"]
       
     # Return the number of collected samples as result of id_tap
